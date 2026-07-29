@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PPn0te.Library — My little corner of the internet</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext y='50' font-size='45'%3E🎀%3C/text%3E%3C/svg%3E">
+  
+  <style>
+    /* =================================================================Texture & Global Variables ================= */
+    @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap');
+
+    :root {
+      --color-bg: #FDFBF7;
+      --color-card-bg: #FFFDF9;
+      --color-primary-pink: #FFD1DC;
+      --color-rose-pink: #E88CA0;
+      --color-dusty-pink: #D4A5B8;
+      --color-cream: #FFF5EE;
+      --color-warm-white: #FFFFFF;
+      --color-matcha: #D4E0C9;
+      --color-beige: #F4EBE1;
+      --color-gold: #D8BC72;
+      --color-brown: #6B5B52;
+      --color-text: #4A403A;
+      --color-border: #F0DCD4;
+      --shadow-cozy: 0 10px 30px -5px rgba(212, 165, 184, 0.2);
+      --font-serif: 'DM Serif Display', serif;
+      --font-sans: 'Poppins', sans-serif;
+    }
+
+    /* =================================================================Base Reset & Typography ================= */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.6;
+      background-image: radial-gradient(var(--color-border) 0.75px, transparent 0.75px);
+      background-size: 24px 24px;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-serif);
+      color: var(--color-brown);
+      font-weight: 400;
+      letter-spacing: 0.5px;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.2s ease;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    /* =================================================================Decorative Elements & Lace ================= */
+    .lace-divider {
+      width: 100%;
+      height: 16px;
+      background: repeating-linear-gradient(45deg, var(--color-primary-pink), var(--color-primary-pink) 10px, var(--color-cream) 10px, var(--color-cream) 20px);
+      opacity: 0.6;
+      margin: 2rem 0;
+      border-radius: 8px;
+    }
+
+    .ribbon-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--color-primary-pink);
+      color: var(--color-brown);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      box-shadow: 0 2px 6px rgba(232, 140, 160, 0.2);
+      border: 1px solid var(--color-rose-pink);
+    }
+
+    .sparkle-float {
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-6px) rotate(3deg); }
+    }
+
+    /* =================================================================Navigation Bar ================= */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255, 253, 249, 0.85);
+      backdrop-filter: blur(10px);
+      border-bottom: 2px dashed var(--color-border);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-brand {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      color: var(--color-brown);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      font-size: 0.95rem;
+      color: var(--color-brown);
+      padding: 6px 12px;
+      border-radius: 12px;
+      transition: background 0.2s, color 0.2s;
+      cursor: pointer;
+    }
+
+    .nav-links a:hover, .nav-links a.active {
+      background: var(--color-primary-pink);
+      color: var(--color-brown);
+    }
+
+    .nav-divider {
+      width: 1px;
+      height: 20px;
+      background: var(--color-dusty-pink);
+      opacity: 0.5;
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--color-brown);
+    }
+
+    /* =================================================================Hero Section ================= */
+    .hero {
+      text-align: center;
+      padding: 5rem 1.5rem 3rem;
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      margin-bottom: 0.5rem;
+      color: var(--color-brown);
+    }
+
+    .hero .subtitle {
+      font-style: italic;
+      font-size: 1.25rem;
+      color: var(--color-rose-pink);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero p {
+      font-size: 1.05rem;
+      color: var(--color-brown);
+      opacity: 0.85;
+      margin-bottom: 2rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-bottom: 3rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 28px;
+      border-radius: 30px;
+      font-weight: 500;
+      cursor: pointer;
+      border: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 15px rgba(212, 165, 184, 0.3);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(232, 140, 160, 0.4);
+    }
+
+    .btn-primary {
+      background: var(--color-rose-pink);
+      color: white;
+    }
+
+    .btn-secondary {
+      background: var(--color-cream);
+      color: var(--color-brown);
+      border: 1px solid var(--color-dusty-pink);
+    }
+
+    /* =================================================================Containers & Grid Cards ================= */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: var(--color-rose-pink);
+      margin-bottom: 3rem;
+      font-size: 1rem;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+    }
+
+    .cozy-card {
+      background: var(--color-card-bg);
+      border: 2px solid var(--color-border);
+      border-radius: 20px;
+      padding: 1.5rem;
+      box-shadow: var(--shadow-cozy);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cozy-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 15px 35px rgba(212, 165, 184, 0.35);
+    }
+
+    .card-preview {
+      width: 100%;
+      height: 180px;
+      background: var(--color-cream);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      margin-bottom: 1.2rem;
+      border: 1px dashed var(--color-dusty-pink);
+    }
+
+    .cozy-card h3 {
+      font-size: 1.4rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .cozy-card p {
+      font-size: 0.92rem;
+      color: var(--color-brown);
+      opacity: 0.8;
+      margin-bottom: 1.5rem;
+    }
+
+    /* =================================================================Timeline / Recent Updates ================= */
+    .timeline-section {
+      background: var(--color-cream);
+      border-top: 2px dashed var(--color-border);
+      border-bottom: 2px dashed var(--color-border);
+      padding: 4rem 1.5rem;
+      margin: 4rem 0;
+    }
+
+    .timeline {
+      max-width: 700px;
+      margin: 0 auto;
+      position: relative;
+      padding-left: 2rem;
+      border-left: 2px dashed var(--color-rose-pink);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 2rem;
+    }
+
+    .timeline-item::before {
+      content: '✿';
+      position: absolute;
+      left: -2.55rem;
+      top: 0;
+      background: var(--color-primary-pink);
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      border: 2px solid var(--color-rose-pink);
+      color: var(--color-brown);
+    }
+
+    .timeline-date {
+      font-size: 0.8rem;
+      color: var(--color-rose-pink);
+      font-weight: 600;
+      margin-bottom: 0.2rem;
+    }
+
+    .timeline-content {
+      background: var(--color-card-bg);
+      padding: 1rem 1.2rem;
+      border-radius: 12px;
+      border: 1px solid var(--color-border);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+    }
+
+    /* =================================================================Footer ================= */
+    footer {
+      text-align: center;
+      padding: 3rem 1.5rem;
+      background: var(--color-cream);
+      border-top: 2px dashed var(--color-border);
+      color: var(--color-brown);
+    }
+
+    footer .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin: 1rem 0;
+      font-size: 0.9rem;
+    }
+
+    footer .footer-links a:hover {
+      color: var(--color-rose-pink);
+    }
+
+    /* =================================================================Responsive Design ================= */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--color-card-bg);
+        padding: 1.5rem;
+        border-bottom: 2px dashed var(--color-border);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+      }
+      .nav-links.open {
+        display: flex;
+      }
+      .mobile-menu-btn {
+        display: block;
+      }
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="navbar">
+    <a onclick="switchPage('home')" class="nav-brand" style="cursor: pointer;">
+      <span>🎀</span> PPn0te.Library
+    </a>
+    <button class="mobile-menu-btn" aria-label="Toggle navigation">☰</button>
+    <nav class="nav-links">
+      <a onclick="switchPage('home')" id="nav-home" class="active">🏠 Home</a>
+      <a onclick="switchPage('freebies')" id="nav-freebies">📚 Freebies</a>
+      <a onclick="switchPage('planners')" id="nav-planners">📝 Planners</a>
+      <a onclick="switchPage('request')" id="nav-request">💌 Requests</a>
+      <a onclick="switchPage('about')" id="nav-about">🌷 About</a>
+      <div class="nav-divider"></div>
+      <a href="https://aniaahm.github.io/Peaks/" target="_blank">🎧 Peeklist</a>
+      <a href="https://aniaahm.github.io/Study-Binder/" target="_blank">⏱ Study Timer</a>
+    </nav>
+  </header>
+
+  <div id="app-container">
+    <div id="page-home" class="page-content">
+      <section class="hero">
+        <div class="ribbon-badge sparkle-float">✿ Welcome to my digital diary</div>
+        <h1>PP Note Library</h1>
+        <p class="subtitle">"My little corner of the internet."</p>
+        <p>A cozy collection of planners, study tools, playlists, watchlists, and little things I create for everyday inspiration.</p>
+        <div class="hero-buttons">
+          <a onclick="switchPage('freebies')" class="btn btn-primary" style="cursor: pointer;">Explore Freebies 🌸</a>
+          <a onclick="switchPage('planners')" class="btn btn-secondary" style="cursor: pointer;">View Planners 📋</a>
+        </div>
+      </section>
+
+      <div class="lace-divider"></div>
+
+      <main class="container">
+        <h2 class="section-title">Featured Treasures</h2>
+        <p class="section-subtitle">Handpicked favorites currently on my desk</p>
+
+        <div class="grid-3">
+          <div class="cozy-card">
+            <div class="card-preview">📋</div>
+            <span class="ribbon-badge">Printable</span>
+            <h3>Printable Planner V2</h3>
+            <p>Undated aesthetic weekly & monthly planner pages styled with warm cottagecore grids and cozy borders.</p>
+            <a onclick="switchPage('planners')" class="btn btn-secondary" style="width:100%; justify-content:center; cursor: pointer;">Open Planner ✿</a>
+          </div>
+
+          <div class="cozy-card">
+            <div class="card-preview">🎧</div>
+            <span class="ribbon-badge">External Archive</span>
+            <h3>Peeklist</h3>
+            <p>Track everything I'm currently watching, reading, and listening to in a custom curated database.</p>
+            <a href="https://aniaahm.github.io/Peaks/" target="_blank" class="btn btn-secondary" style="width:100%; justify-content:center;">Open Peeklist ☁️</a>
+          </div>
+
+          <div class="cozy-card">
+            <div class="card-preview">⏱</div>
+            <span class="ribbon-badge">Productivity</span>
+            <h3>Study Timer</h3>
+            <p>A cute pastel Pomodoro focus timer designed specifically for cozy study sessions and deep work.</p>
+            <a href="https://aniaahm.github.io/Study-Binder/" target="_blank" class="btn btn-secondary" style="width:100%; justify-content:center;">Start Studying 🌷</a>
+          </div>
+        </div>
+      </main>
+
+      <section class="timeline-section">
+        <div class="container" style="padding: 0;">
+          <h2 class="section-title" style="margin-bottom: 2rem;">Recent Diary Updates</h2>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-date">August 2026</div>
+              <div class="timeline-content">
+                <h3>🌷 Planner Version 2 Released</h3>
+                <p>Added fresh minimalist layouts with weekly habit trackers and gratitude prompts.</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-date">July 2026</div>
+              <div class="timeline-content">
+                <h3>🎀 Coquette Sticker Pack Added</h3>
+                <p>Over 40+ high-res PNG stickers including bows, lace ribbons, and vintage stamps.</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-date">June 2026</div>
+              <div class="timeline-content">
+                <h3>🎧 Summer Playlist Updated</h3>
+                <p>Fresh lo-fi and indie acoustic tracks added to my public listening archive.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div id="page-freebies" class="page-content" style="display: none;">
+      <section class="hero" style="padding-bottom: 2rem;">
+        <div class="ribbon-badge sparkle-float">✿ Cozy Downloads</div>
+        <h1>Freebies Hub</h1>
+        <p class="subtitle">"Take a little piece of my digital desk home."</p>
+      </section>
+      <div class="lace-divider"></div>
+      <main class="container">
+        <div class="grid-3">
+          <div class="cozy-card">
+            <div class="card-preview">📚</div>
+            <span class="ribbon-badge">Printable Planners</span>
+            <h3>Cottagecore Weekly Pad</h3>
+            <p>A printable PDF layout featuring floral corners, habit trackers, and notes sections.</p>
+            <div style="font-size: 0.8rem; color: var(--color-rose-pink); margin-bottom: 1rem;">Version 2.1 • Updated Aug 2026</div>
+            <a href="pp.n0te planner𝜗𝜚⋆₊˚-A4 .pdf" download="pp.n0te planner𝜗𝜚⋆₊˚-A4 .pdf" class="btn btn-primary download-btn" style="width:100%; justify-content:center;">Download PDF 📥</a>
+          </div>
+          <div class="cozy-card">
+            <div class="card-preview">🎀</div>
+            <span class="ribbon-badge">Sticker Packs</span>
+            <h3>Coquette Bows & Lace</h3>
+            <p>40+ transparent PNG digital stickers curated for GoodNotes and Notion journals.</p>
+            <div style="font-size: 0.8rem; color: var(--color-rose-pink); margin-bottom: 1rem;">Version 1.0 • Updated Jul 2026</div>
+            <a href="#" class="btn btn-primary download-btn" style="width:100%; justify-content:center;">Download ZIP 📥</a>
+          </div>
+          <div class="cozy-card">
+            <div class="card-preview">🖼</div>
+            <span class="ribbon-badge">Profile Pictures</span>
+            <h3>Vintage Stationery Icons</h3>
+            <p>Matching aesthetic profile pictures featuring pastel books, teacups, and ribbons.</p>
+            <div style="font-size: 0.8rem; color: var(--color-rose-pink); margin-bottom: 1rem;">Version 1.2 • Updated Jun 2026</div>
+            <a href="#" class="btn btn-primary download-btn" style="width:100%; justify-content:center;">Download Pack 📥</a>
+          </div>
+          <div class="cozy-card">
+            <div class="card-preview">🖥</div>
+            <span class="ribbon-badge">Wallpapers</span>
+            <h3>Matcha Desktop Wallpaper</h3>
+            <p>Cozy minimalist desktop wallpaper with integrated monthly calendar grid.</p>
+            <div style="font-size: 0.8rem; color: var(--color-rose-pink); margin-bottom: 1rem;">Version 2.0 • Updated Aug 2026</div>
+            <a href="#" class="btn btn-primary download-btn" style="width:100%; justify-content:center;">Download PNG 📥</a>
+          </div>
+          <div class="cozy-card">
+            <div class="card-preview">📝</div>
+            <span class="ribbon-badge">Templates</span>
+            <h3>Notion Study Dashboard</h3>
+            <p>Aesthetic customized aesthetic dashboard layout for students with task and grade tracking.</p>
+            <div style="font-size: 0.8rem; color: var(--color-rose-pink); margin-bottom: 1rem;">Version 3.1 • Updated Aug 2026</div>
+            <a href="https://aniaahm.github.io/Study-Binder/" target="_blank" class="btn btn-primary" style="width:100%; justify-content:center;">Duplicate Template ↗</a>
+          </div>
+          <div class="cozy-card" style="opacity: 0.85;">
+            <div class="card-preview">✨</div>
+            <span class="ribbon-badge" style="background: var(--color-beige);">Coming Soon</span>
+            <h3>Sanrio Stationery Pack</h3>
+            <p>Upcoming vintage journal stickers and retro memo pad templates currently being designed.</p>
+            <div style="font-size: 0.8rem; color: var(--color-rose-pink); margin-bottom: 1rem;">Release Expected • Sept 2026</div>
+            <button class="btn btn-secondary" style="width:100%; justify-content:center; cursor: not-allowed;" disabled>In Progress ⏳</button>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <div id="page-planners" class="page-content" style="display: none;">
+      <section class="hero" style="padding-bottom: 2rem;">
+        <div class="ribbon-badge sparkle-float">✿ Dedicated Gallery</div>
+        <h1>Planner Collection</h1>
+        <p class="subtitle">"Organize your days with gentle aesthetics and warmth."</p>
+      </section>
+      <div class="lace-divider"></div>
+      <main class="container">
+        <div class="grid-3">
+          <div class="cozy-card">
+            <div class="card-preview">📅</div>
+            <span class="ribbon-badge">Version 2.0</span>
+            <h3>Undated Daily Journal Pad</h3>
+            <p>Structured daily schedule with top priorities, meal tracking, water intake, and evening reflections.</p>
+            <ul style="font-size: 0.85rem; color: var(--color-brown); opacity: 0.8; margin-bottom: 1.5rem; padding-left: 1rem; list-style: disc;">
+              <li>High-res printable PDF</li>
+              <li>Optimized for GoodNotes / Notability</li>
+              <li>Includes 4 pastel color variants</li>
+            </ul>
+            <a href="pp.n0te planner𝜗𝜚⋆₊˚-A4 .pdf" download="pp.n0te planner𝜗𝜚⋆₊˚-A4 .pdf" class="btn btn-primary download-btn" style="width:100%; justify-content:center;">Download PDF 📥</a>
+          </div>
+          <div class="cozy-card">
+            <div class="card-preview">🗓</div>
+            <span class="ribbon-badge">Version 1.5</span>
+            <h3>Monthly Academic Spread</h3>
+            <p>Designed for students to map out exams, project deadlines, and reading assignments cleanly.</p>
+            <ul style="font-size: 0.85rem; color: var(--color-brown); opacity: 0.8; margin-bottom: 1.5rem; padding-left: 1rem; list-style: disc;">
+              <li>Clean grid & exam countdowns</li>
+              <li>Semester grade tracker included</li>
+              <li>Printable A4 & US Letter sizes</li>
+            </ul>
+            <a href="pp.n0te planner𝜗𝜚⋆₊˚-A4 .pdf" download="pp.n0te planner𝜗𝜚⋆₊˚-A4 .pdf" class="btn btn-primary download-btn" style="width:100%; justify-content:center;">Download PDF 📥</a>
+          </div>
+          <div class="cozy-card">
+            <div class="card-preview">🌷</div>
+            <span class="ribbon-badge">Version 1.0</span>
+            <h3>Cozy Habit & Wellness Log</h3>
+            <p>A gentle layout dedicated to self-care, mood charting, sleep tracking, and positive affirmations.</p>
+            <ul style="font-size: 0.85rem; color: var(--color-brown); opacity: 0.8; margin-bottom: 1.5rem; padding-left: 1rem; list-style: disc;">
+              <li>30-day habit builder grid</li>
+              <li>Self-care checklist & reading log</li>
+              <li>Soft pastel cream background</li>
+            </ul>
+            <a href="pp.n0te planner𝜗𝜚⋆₊˚-A4 .pdf" download="pp.n0te planner𝜗𝜚⋆₊˚-A4 .pdf" class="btn btn-primary download-btn" style="width:100%; justify-content:center;">Download PDF 📥</a>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <div id="page-request" class="page-content" style="display: none;">
+      <main class="container" style="max-width: 750px; padding-top: 4rem;">
+        <div class="cozy-card" style="text-align: center; padding: 3rem 2rem;">
+          <div class="ribbon-badge sparkle-float" style="margin-bottom: 1rem;">💌 Suggestion Box</div>
+          <h1 style="font-size: 2.5rem; margin-bottom: 1rem;">Request Something</h1>
+          <p style="font-size: 1.05rem; max-width: 550px; margin: 0 auto 2rem; opacity: 0.85;">
+            Have an idea for a planner, sticker pack, wallpaper, study resource, or website feature? I'd love to hear your suggestions!
+          </p>
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSfCnrYpEGBVotLCmjlAJuQbdeD3b_lA-Gntyk6dFC6OTTne-Q/viewform?usp=header" target="_blank" class="btn btn-primary" style="padding: 16px 36px; font-size: 1.1rem; margin-bottom: 2rem;">
+            💌 Open Google Form
+          </a>
+          <p style="font-size: 0.9rem; color: var(--color-rose-pink); font-style: italic; max-width: 500px; margin: 0 auto;">
+            I read every request, but I may not be able to create every idea. Thank you for supporting PP Note Library! ♡
+          </p>
+        </div>
+      </main>
+    </div>
+
+    <div id="page-about" class="page-content" style="display: none;">
+      <main class="container" style="max-width: 750px; padding-top: 4rem;">
+        <div class="cozy-card" style="padding: 3rem 2.5rem;">
+          <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+            <div style="font-size: 3.5rem; background: var(--color-cream); width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 1px dashed var(--color-dusty-pink);">🌷</div>
+            <div>
+              <span class="ribbon-badge" style="margin-bottom: 4px;">Diary Lore</span>
+              <h1 style="font-size: 2.2rem;">Hi! I'm Ania.</h1>
+            </div>
+          </div>
+          <p style="font-size: 1.05rem; line-height: 1.8; margin-bottom: 1.5rem; color: var(--color-brown);">
+            I'm a student who loves creating planners, designing cute resources, making playlists, tracking shows, and documenting everyday life.
+          </p>
+          <p style="font-size: 1.05rem; line-height: 1.8; margin-bottom: 2rem; color: var(--color-brown);">
+            <strong>PP Note Library</strong> is my little creative corner where I share everything I make. Whether you're here to grab a study planner, download whimsical sticker packs, or simply enjoy a quiet aesthetic space, I'm so glad you stopped by!
+          </p>
+          <div style="border-top: 2px dashed var(--color-border); padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; font-size: 0.9rem; color: var(--color-rose-pink);">
+            <span>✨ Thanks for visiting my corner</span>
+            <span>♡ Always crafted with love</span>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <footer style="margin-top: 4rem;">
+    <p>Made with ♡ by pp.n0te</p>
+    <div class="footer-links">
+      <a href="https://instagram.com" target="_blank">Instagram</a>
+      <a href="https://aniaahm.github.io/Peaks/" target="_blank">Peeklist</a>
+      <a href="https://aniaahm.github.io/Study-Binder/" target="_blank">Study Timer</a>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Mobile Menu Toggle
+      const mobileBtn = document.querySelector('.mobile-menu-btn');
+      const navLinks = document.querySelector('.nav-links');
+
+      if (mobileBtn && navLinks) {
+        mobileBtn.addEventListener('click', () => {
+          navLinks.classList.toggle('open');
+          mobileBtn.textContent = navLinks.classList.contains('open') ? '✕' : '☰';
+        });
+      }
+    });
+
+    // Single-File Page Switcher
+    function switchPage(pageId) {
+      document.querySelectorAll('.page-content').forEach(page => {
+        page.style.display = 'none';
+      });
+
+      const targetPage = document.getElementById(`page-${pageId}`);
+      if (targetPage) {
+        targetPage.style.display = 'block';
+      }
+
+      document.querySelectorAll('.nav-links a').forEach(link => {
+        link.classList.remove('active');
+      });
+      const activeLink = document.getElementById(`nav-${pageId}`);
+      if (activeLink) {
+        activeLink.classList.add('active');
+      }
+
+      const navLinks = document.querySelector('.nav-links');
+      const mobileBtn = document.querySelector('.mobile-menu-btn');
+      if (navLinks && navLinks.classList.contains('open')) {
+        navLinks.classList.remove('open');
+        if(mobileBtn) mobileBtn.textContent = '☰';
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>
